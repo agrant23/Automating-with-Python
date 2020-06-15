@@ -1,36 +1,36 @@
-#Searching_Wiki through google with a user search. 
+#Searching_Wiki_Final
 
 from selenium import webdriver
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.by import By
+import time
+
+user_search = input("what would you like to search for in Wikipedia: ")
 
 driver = webdriver.Chrome()
-driver.get("http:google.com")
+driver.get("https://www.google.com/")
 
-user_search = input("what would you like to search? ")
+search_field = driver.find_element_by_name('q')       
+search_field.send_keys("wikipedia")
+time.sleep(1)
 
-search_box = driver.find_element_by_name('q')       #XPath < CSS < Links Text < Name < ID
+search_button = driver.find_element_by_name("btnK")                 
 
-search_box.send_keys("wikipedia")
+#search_button = WebDriverWait(driver, 20).until(           #didn't work
+#EC.element_to_be_clickable((By.NAME,'btnk'))) 
 
-driver.implicitly_wait(30)
+search_button.click()                                                                                                                 
 
-search_button = driver.find_element_by_name("btnK")
+link_block = driver.find_elements_by_class_name('r')
+first_link_element = link_block[0]
 
-search_button.click()
+wiki_link = first_link_element.find_element_by_tag_name('h3')
+wiki_link.click()
 
-wiki = driver.find_element_by_xpath('//*[@id="rso"]/div[1]/div/div[1]/a/h3')    #wiki = driver.find_element_by_link_text('Wikipedia') couldn't make this work?
+search_wiki_field = driver.find_element_by_class_name('pure-button')            
+search_wiki_field.send_keys(user_search)
 
-wiki.click()
+search_wiki_field.submit()
 
-search_wiki_box = driver.find_element_by_name('search')
-
-search_wiki_box.send_keys(user_search)
-
-driver.implicitly_wait(30)
-
-search_wiki_box.submit()                                                    #is using this a poor coding procedure?  couldn't use #wiki_search_button = driver.find_element_by_name("go")
-
-view_history = driver.find_element_by_link_text('View history')             #this is just for fun.
-
-view_history.click()
-
-#maybe use view_history.submit()   since it's the final method.
+driver.quit()
