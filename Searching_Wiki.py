@@ -28,9 +28,7 @@ wiki_link.click()
 search_wiki_field = driver.find_element_by_id('searchInput')            
 search_wiki_field.send_keys(user_search)
 
-
 search_wiki_button = driver.find_element_by_class_name('pure-button')
-search_wiki_field.click()
-
+search_wiki_button.click()
 
 driver.quit()
