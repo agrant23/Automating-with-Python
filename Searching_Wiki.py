@@ -15,9 +15,13 @@ search_field = driver.find_element_by_name('q')
 search_field.send_keys("wikipedia")
 
 search_button = WebDriverWait(driver, 1).until(
-EC.element_to_be_clickable((By.NAME,'btnK'))) 
-
+EC.element_to_be_clickable(By.NAME,'btnK')) 
 search_button.click()                                                                                                                 
+#would like to use the code below but getting the error selenium.common.exceptions.InvalidArgumentException: Message: invalid argument: 'using' must be a string
+#search_button_loc = (By.NAME,'btnK')
+#search_button = driver.find_element(search_button_loc)
+#search_button = WebDriverWait(driver, 1).until(
+#EC.element_to_be_clickable(search_button_loc)) 
 
 link_block = driver.find_elements_by_class_name('r')
 first_link_element = link_block[0]
