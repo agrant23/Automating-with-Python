@@ -1,0 +1,47 @@
+#Unittes_2
+
+import unittest
+from selenium import webdriver
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.by import By
+
+#driver = webdriver.Chrome()
+
+class WikiSearchTest(unittest.TestCase):                  
+
+    def setUp(self):
+        self.driver = webdriver.Chrome()                   
+
+    def test_Google_site_title(self):
+        self.driver.get("https://www.google.com/")
+        
+        self.assertEquals(self.driver.title,'Google')
+
+    def test_Wiki_site_title(self):
+        self.driver.get("https://www.google.com/")
+        search_field = self.driver.find_element_by_name('q')       
+        search_field.clear()
+        search_field.send_keys("wikipedia") 
+
+        search_button_loc = By.NAME,'btnK'
+        search_button = self.driver.find_element(*search_button_loc)
+        search_button = WebDriverWait(self.driver, 1).until(
+        EC.element_to_be_clickable(search_button_loc)) 
+        search_button.click()
+
+        link_block = self.driver.find_elements_by_class_name('r')
+        first_link_element = link_block[0]
+
+        wiki_link = first_link_element.find_element_by_tag_name('h3')
+        wiki_link.click()
+
+        self.assertEquals(self.driver.title,'Wikipedia')
+
+
+    def tearDown(self):
+        self.driver.quit()
+
+
+if __name__ == "__main__":                      
+    unittest.main()  
