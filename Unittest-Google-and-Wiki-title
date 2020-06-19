@@ -1,4 +1,4 @@
-#Unittes_2
+#Unittest_Google_Wiki_title.py
 
 import unittest
 from selenium import webdriver
@@ -14,7 +14,7 @@ class WikiSearchTest(unittest.TestCase):
     def test_Google_site_title(self):
         self.driver.get("https://www.google.com/")
         
-        self.assertEquals(self.driver.title,'Google')
+        self.assertEqual(self.driver.title,'Google')
 
     def test_Wiki_site_title(self):
         self.driver.get("https://www.google.com/")
@@ -34,7 +34,7 @@ class WikiSearchTest(unittest.TestCase):
         wiki_link = first_link_element.find_element_by_tag_name('h3')
         wiki_link.click()
 
-        self.assertEquals(self.driver.title,'Wikipedia')
+        self.assertEqual(self.driver.title,'Wikipedia')
 
 
     def tearDown(self):
