@@ -1,0 +1,68 @@
+#Johnson_Controls_Tests_2
+
+import unittest
+from selenium import webdriver
+from selenium.webdriver.support.select import Select
+
+
+def last_word(ph_text):
+    ph_text_list = ph_text.split(' ')
+    l = len(ph_text_list)
+    return ph_text_list[l-1]
+
+def placeholder_text(contact_link_block,int):
+    info = contact_link_block[int]
+    info_field = info.find_element_by_css_selector("input[type='text']")
+    ph_text_name = info_field.get_attribute("placeholder")
+    return ph_text_name
+
+def selected_text(contact_link,int):
+    info = contact_link[int]
+    select = Select(info.find_element_by_class_name('select'))
+    selected_option = select.first_selected_option
+    return selected_option.text
+    
+    
+class Johnson_Controls_Tests(unittest.TestCase):                  
+
+    def setUp(self):
+        self.driver = webdriver.Chrome()                   
+        self.driver.get("https://www.johnsoncontrols.com/")
+        self.driver.maximize_window()
+
+    def test_contact_required_fields(self):
+        drop_down_tabs = self.driver.find_elements_by_class_name('nav-item-text')            
+        drop_down_about_us = drop_down_tabs[3]                                          
+        drop_down_about_us.click()
+
+        contact_us_fields = self.driver.find_element_by_xpath('//a[@href="/contact-us"]')    
+        contact_us_fields.click()
+        self.driver.switch_to.frame('contact-us-pardot')
+        contact_link_block = self.driver.find_elements_by_css_selector('.form-field')
+
+        first_name_1 = last_word(placeholder_text(contact_link_block,0))
+        self.assertEqual(first_name_1,'*')
+        
+        last_name_2 = last_word(placeholder_text(contact_link_block,1))
+        self.assertEqual(last_name_2,'*')
+
+        email_3 = last_word(placeholder_text(contact_link_block,2))
+        self.assertEqual(email_3,'*')
+
+        phone_4 = last_word(placeholder_text(contact_link_block,3))
+        self.assertEqual(phone_4,'*')
+
+        pupose_inquiry_6 = last_word(selected_text(contact_link_block,5))
+        self.assertEqual(pupose_inquiry_6,'*')
+        
+        products_services_7 = last_word(selected_text(contact_link_block,6))
+        self.assertEqual(products_services_7,'*')
+
+        country_8 = last_word(selected_text(contact_link_block,7))
+        self.assertEqual(country_8,'*')
+
+    def tearDown(self):
+        self.driver.quit()
+
+if __name__ == "__main__":                      
+    unittest.main()  
