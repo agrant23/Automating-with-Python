@@ -11,7 +11,7 @@ from selenium.webdriver.common.by import By
 def last_word(ph_text):
     ph_text_list = ph_text.split(' ')
     l = len(ph_text_list)
-    return ph_text_list[l-1]
+    return ph_text_list[l-1]                   
 
 def placeholder_text(contact_link_block,int):
     info = contact_link_block[int]
