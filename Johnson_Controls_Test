@@ -6,7 +6,7 @@ from selenium import webdriver
 def end_ph_text(ph_text):
     ph_text_list = ph_text.split(' ')
     l = len(ph_text_list)
-    return ph_text_list[l-1]
+    return ph_text_list[l-1]                                #this can be   return ph_text_list[-1]    does this difference matter 
 
 def last_word_text(ph_text):                                #It's bad coding to use two types of parsing to get the last word
     word_list = ph_text.split()                             #I just want to see which is better
