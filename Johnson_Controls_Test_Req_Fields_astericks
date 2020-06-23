@@ -49,12 +49,12 @@ class Johnson_Controls_Tests(unittest.TestCase):
         purpose_option = select1.first_selected_option
         self.assertEqual(last_word(purpose_option.text),'*')
 
-        products_serv_class = self.driver.find_element_by_css_selector("p[class='form-field  Products_Services_I_m_Interested_In pd-select required    ']")                     #OMG this worked
+        products_serv_class = self.driver.find_element_by_css_selector('.form-field.Products_Services_I_m_Interested_In.pd-select.required')
         select2 = Select(products_serv_class.find_element_by_class_name('select'))
         products_serv_option = select2.first_selected_option
         self.assertEqual(last_word(products_serv_option.text),'*')
 
-        country_class = self.driver.find_element_by_css_selector("p[class='form-field  country pd-select required    ']")                     #this is likely a bad attribute value since it requires the exact number of spaces
+        country_class = self.driver.find_element_by_css_selector(".form-field.country.pd-select.required") 
         select3 = Select(country_class.find_element_by_class_name('select'))
         country_option = select3.first_selected_option
         self.assertEqual(last_word(country_option.text),'*')     
@@ -63,4 +63,4 @@ class Johnson_Controls_Tests(unittest.TestCase):
         self.driver.quit()
 
 if __name__ == "__main__":                      
-    unittest.main()
+    unittest.main()  
