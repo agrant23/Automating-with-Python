@@ -27,34 +27,34 @@ class Johnson_Controls_Tests(unittest.TestCase):
         wait.until(EC.frame_to_be_available_and_switch_to_it((By.ID,'contact-us-pardot')))
 
     def test_asterick_on_required_field(self):                                                                                       
-        first_name_field = self.driver.find_element_by_xpath('//input[@placeholder="First Name *"]')
-        first_name_ph = first_name_field.get_attribute("placeholder")
-        self.assertEqual(last_word(first_name_ph),'*')
+        first_name_field = self.driver.find_element_by_xpath('//p[contains(@class,"first_name")]/input')
+        first_name_place_holder = first_name_field.get_attribute("placeholder")
+        self.assertEqual(last_word(first_name_place_holder),'*')
 
-        last_name_field = self.driver.find_element_by_xpath('//input[@placeholder="Last Name *"]')
-        last_name_ph = last_name_field.get_attribute("placeholder")
-        self.assertEqual(last_word(last_name_ph),'*')
+        
+        last_name_field = self.driver.find_element_by_xpath('//p[contains(@class,"last_name")]/input')
+        last_name_place_holder = last_name_field.get_attribute("placeholder")
+        self.assertEqual(last_word(last_name_place_holder),'*')
 
-        email_field = self.driver.find_element_by_xpath('//input[@placeholder="Email *"]')
-        email_ph = email_field.get_attribute("placeholder")
-        self.assertEqual(last_word(email_ph),'*')
+        email_field = self.driver.find_element_by_xpath('//p[contains(@class,"email")]/input')
+        email_place_holder = email_field.get_attribute("placeholder")
+        self.assertEqual(last_word(email_place_holder),'*')
 
-        phone_field = self.driver.find_element_by_xpath('//input[@placeholder="Phone *"]')
-        phone_ph = phone_field.get_attribute("placeholder")
-        self.assertEqual(last_word(phone_ph),'*')
+        phone_field = self.driver.find_element_by_xpath('//p[contains(@class,"phone")]/input')
+        phone_place_holder = phone_field.get_attribute("placeholder")
+        self.assertEqual(last_word(phone_place_holder),'*')
 
-        #purpose_class = self.driver.find_element_by_css_selector("p[class='form-field  Purpose_of_Inquiry pd-select required    ']")                     #this is likely a bad attribute value since it requires the exact number of spaces
-        purpose_class = self.driver.find_element_by_css_selector('.form-field.Purpose_of_Inquiry.pd-select.required')
+        purpose_class = self.driver.find_element_by_xpath('//p[contains(@class,"Purpose_of_Inquiry")]')
         select1 = Select(purpose_class.find_element_by_class_name('select'))
         purpose_option = select1.first_selected_option
         self.assertEqual(last_word(purpose_option.text),'*')
 
-        products_serv_class = self.driver.find_element_by_css_selector('.form-field.Products_Services_I_m_Interested_In.pd-select.required')
+        products_serv_class = self.driver.find_element_by_xpath('//p[contains(@class,"Products_Services")]')
         select2 = Select(products_serv_class.find_element_by_class_name('select'))
         products_serv_option = select2.first_selected_option
         self.assertEqual(last_word(products_serv_option.text),'*')
 
-        country_class = self.driver.find_element_by_css_selector(".form-field.country.pd-select.required") 
+        country_class = self.driver.find_element_by_xpath('//p[contains(@class,"country")]')            
         select3 = Select(country_class.find_element_by_class_name('select'))
         country_option = select3.first_selected_option
         self.assertEqual(last_word(country_option.text),'*')     
