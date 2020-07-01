@@ -33,7 +33,7 @@ class Test_Password_Count(unittest.TestCase):
         sign_in_button = self.driver.find_element_by_id("header-signin-link")
         sign_in_button.click()
 
-        wait.until(EC.url_changes('https://login.yahoo.com/config/login'))              #this succeded in getting rid of a time.sleep() but below this didn't work
+        wait.until(EC.url_changes('https://login.yahoo.com/config/login'))              #this succeeded in getting rid of a time.sleep() but below this didn't work
         
         username_field = self.driver.find_element_by_id('login-username')
         
