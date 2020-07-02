@@ -75,9 +75,9 @@ class Test_Password_Count(unittest.TestCase):
 
         wait.until(EC.url_changes('https://login.yahoo.com/account/personalinfo'))
 
-        change_password_loc = (By.LINK_TEXT,'Account Security')
-        change_password = self.driver.find_element(*change_password_loc)
-        change_password.click()
+        account_security_loc = (By.LINK_TEXT,'Account Security')
+        account_security = self.driver.find_element(*account_security_loc)
+        account_security.click()
 
         change_password_loc = (By.PARTIAL_LINK_TEXT,'Change password')
         change_password = self.driver.find_element(*change_password_loc)
